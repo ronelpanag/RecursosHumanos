@@ -25,6 +25,11 @@
 
   <ItemGroup>
     <Folder Include="Services\" />
+    <Folder Include="Views\Empleados\" />
+    <Folder Include="Views\Licencias\" />
+    <Folder Include="Views\Nominas\" />
+    <Folder Include="Views\Permisos\" />
+    <Folder Include="Views\Salidas\" />
   </ItemGroup>
 
 </Project>
