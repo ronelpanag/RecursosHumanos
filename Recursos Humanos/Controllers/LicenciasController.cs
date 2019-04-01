@@ -22,7 +22,8 @@ namespace Recursos_Humanos.Controllers
         // GET: Licencias
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Licencias.ToListAsync());
+            var applicationDbContext = _context.Licencias.Include(l => l.Empleado);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Licencias/Details/5
@@ -34,6 +35,7 @@ namespace Recursos_Humanos.Controllers
             }
 
             var licencia = await _context.Licencias
+                .Include(l => l.Empleado)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (licencia == null)
             {
@@ -46,6 +48,7 @@ namespace Recursos_Humanos.Controllers
         // GET: Licencias/Create
         public IActionResult Create()
         {
+            ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "Id", "Apellido");
             return View();
         }
 
@@ -54,7 +57,7 @@ namespace Recursos_Humanos.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CodigoEmpleado,Desde,Hasta,Motivo,Comentarios")] Licencia licencia)
+        public async Task<IActionResult> Create([Bind("Id,EmpleadoId,Desde,Hasta,Motivo,Comentarios")] Licencia licencia)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +65,7 @@ namespace Recursos_Humanos.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "Id", "Apellido", licencia.EmpleadoId);
             return View(licencia);
         }
 
@@ -78,6 +82,7 @@ namespace Recursos_Humanos.Controllers
             {
                 return NotFound();
             }
+            ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "Id", "Apellido", licencia.EmpleadoId);
             return View(licencia);
         }
 
@@ -86,7 +91,7 @@ namespace Recursos_Humanos.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CodigoEmpleado,Desde,Hasta,Motivo,Comentarios")] Licencia licencia)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,EmpleadoId,Desde,Hasta,Motivo,Comentarios")] Licencia licencia)
         {
             if (id != licencia.Id)
             {
@@ -113,6 +118,7 @@ namespace Recursos_Humanos.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "Id", "Apellido", licencia.EmpleadoId);
             return View(licencia);
         }
 
@@ -125,6 +131,7 @@ namespace Recursos_Humanos.Controllers
             }
 
             var licencia = await _context.Licencias
+                .Include(l => l.Empleado)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (licencia == null)
             {
