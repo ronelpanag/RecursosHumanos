@@ -46,7 +46,17 @@
                 @Html.DisplayFor(modelItem => item.Cargo.Descripcion)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Estado)
+                @{ 
+                    if (item.Estado)
+                    {
+                        ViewData["Estado"] = "Activo";
+                    }
+                    else
+                    {
+                        ViewData["Estado"] = "Inactivo";
+                    }
+                }
+                @ViewData["Estado"]
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

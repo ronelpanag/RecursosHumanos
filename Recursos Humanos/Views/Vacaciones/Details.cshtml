@@ -1,14 +1,13 @@
-﻿@model Recursos_Humanos.Models.Procesos.Licencia
+﻿@model Recursos_Humanos.Models.Procesos.Vacacion
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Details";
 }
 
-<h1>Delete</h1>
+<h1>Details</h1>
 
-<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Licencia</h4>
+    <h4>Vacacion</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -16,7 +15,7 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Empleado.Apellido)
-        </dd class>
+        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Desde)
         </dt>
@@ -30,10 +29,16 @@
             @Html.DisplayFor(model => model.Hasta)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Motivo)
+            @Html.DisplayNameFor(model => model.AnioCorrespondiente)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Motivo)
+            @Html.DisplayFor(model => model.AnioCorrespondiente)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Completa)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Completa)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Comentarios)
@@ -42,10 +47,8 @@
             @Html.DisplayFor(model => model.Comentarios)
         </dd>
     </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Volver a la lista</a>
-    </form>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Volver a la lista</a>
 </div>

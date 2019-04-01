@@ -14,7 +14,7 @@
     --yellow: #ffc107;
     --green: #28a745;
     --teal: #20c997;
-    --cyan: #17a2b8;
+    --cyan: #00BCD4;
     --white: #fff;
     --gray: #6c757d;
     --gray-dark: #343a40;
@@ -4155,7 +4155,7 @@ input[type="button"].btn-block {
   align-items: center;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  padding: 0.5rem 1rem;
+  padding: 0.89rem 1rem;
 }
 
 .navbar > .container,
@@ -6539,7 +6539,7 @@ button.bg-success:focus {
 }
 
 .bg-info {
-  background-color: #17a2b8 !important;
+    background-color: #03A9F4 !important;
 }
 
 a.bg-info:hover, a.bg-info:focus,

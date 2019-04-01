@@ -23,6 +23,7 @@ namespace Recursos_Humanos.Controllers
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Empleados.Include(e => e.Cargo).Include(e => e.Departamento);
+            
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -63,6 +64,7 @@ namespace Recursos_Humanos.Controllers
         {
             if (ModelState.IsValid)
             {
+                empleado.Estado = true;
                 _context.Add(empleado);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -150,12 +152,13 @@ namespace Recursos_Humanos.Controllers
         // POST: Empleados/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var empleado = await _context.Empleados.FindAsync(id);
-            _context.Empleados.Remove(empleado);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            //    var empleado = await _context.Empleados.FindAsync(id);
+            //    empleado.Estado = false;
+            //    _context.Update(empleado);
+            //    await _context.SaveChangesAsync();
+            return RedirectToAction("Create", "Salidas", id);
         }
 
         private bool EmpleadoExists(int id)
