@@ -18,8 +18,10 @@ namespace Recursos_Humanos.Models.Procesos
         [Required]
         public int EmpleadoId { get; set; }
         [Required]
+        [DataType(DataType.Date)]
         public DateTime Desde { get; set; }
         [Required]
+        [DataType(DataType.Date)]
         public DateTime Hasta { get; set; }
         [Required]
         public string Comentarios { get; set; }

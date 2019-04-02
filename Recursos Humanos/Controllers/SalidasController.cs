@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Recursos_Humanos.Data;
+using Recursos_Humanos.Models.Colaboradores;
 using Recursos_Humanos.Models.Procesos;
 
 namespace Recursos_Humanos.Controllers
@@ -46,7 +47,7 @@ namespace Recursos_Humanos.Controllers
         }
 
         // GET: Salidas/Create
-        public IActionResult Create(int? id)
+        public IActionResult Create()
         {
             ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "Id", "Nombre", "Apellido");
             return View();
@@ -61,9 +62,11 @@ namespace Recursos_Humanos.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(salida);
+                var empleado = (from e in _context.Empleados where e.Id == salida.EmpleadoId select e);
+                salida.Empleado = empleado.ToList<Empleado>().ElementAt(0);
                 salida.Empleado.Estado = false;
                 _context.Empleados.Update(salida.Empleado);
+                _context.Add(salida);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

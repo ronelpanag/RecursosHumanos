@@ -37,7 +37,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Empleado.Apellido)
+                @{
+                    ViewData["Concatenacion"] = item.Empleado.Nombre + " " + item.Empleado.Apellido;
+                }
+                @ViewData["Concatenacion"]
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Desde)

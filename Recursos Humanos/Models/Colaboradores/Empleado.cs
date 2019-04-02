@@ -26,6 +26,7 @@ namespace Recursos_Humanos.Models.Colaboradores
         public int CargoId { get; set; }
         public Cargo Cargo { get; set; }
         [Required]
+        [DataType(DataType.Date)]
         public DateTime FerchaIngreso { get; set; }
         [Required]
         public double Salario { get; set; }

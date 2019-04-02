@@ -17,10 +17,13 @@ namespace Recursos_Humanos.Models.Procesos
         public int EmpleadoId { get; set; }
         public Empleado Empleado { get; set; }
         [Required]
+        [DisplayName("Tipo de Salida")]
         public string TipoSalida { get; set; }
         [Required]
         public string Motivo { get; set; }
         [Required]
+        [DataType(DataType.Date)]
+        [DisplayName("Fecba de Salida")]
         public DateTime FechaSalida { get; set; }
     }
 }
