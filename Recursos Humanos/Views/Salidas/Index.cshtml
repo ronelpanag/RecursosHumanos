@@ -1,32 +1,28 @@
-﻿@model IEnumerable<Recursos_Humanos.Models.Procesos.Licencia>
+﻿@model IEnumerable<Recursos_Humanos.Models.Procesos.Salida>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Salidas";
 }
 
-<h1>Index</h1>
-
+<h1>Listado de salidas</h1>
+<hr />
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-outline-primary">Nueva salida</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Empleado)
-
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Desde)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Hasta)
+                @Html.DisplayNameFor(model => model.TipoSalida)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Motivo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Comentarios)
+                @Html.DisplayNameFor(model => model.FechaSalida)
             </th>
             <th></th>
         </tr>
@@ -35,20 +31,19 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Empleado.Apellido)
-
+                @{
+                    ViewData["Concatenacion"] = item.Empleado.Nombre + " " + item.Empleado.Apellido;
+                  }
+                @ViewData["Concatenacion"]
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Desde)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hasta)
+                @Html.DisplayFor(modelItem => item.TipoSalida)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Motivo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Comentarios)
+                @Html.DisplayFor(modelItem => item.FechaSalida)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

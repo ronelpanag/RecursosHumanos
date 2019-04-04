@@ -1,4 +1,4 @@
-﻿@model Recursos_Humanos.Models.Procesos.Licencia
+﻿@model Recursos_Humanos.Models.Procesos.Vacacion
 
 @{
     ViewData["Title"] = "Create";
@@ -6,17 +6,15 @@
 
 <h1>Create</h1>
 
-<h4>Licencia</h4>
+<h4>Vacacion</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-
                 <label asp-for="EmpleadoId" class="control-label"></label>
                 <select asp-for="EmpleadoId" class ="form-control" asp-items="ViewBag.EmpleadoId"></select>
-
             </div>
             <div class="form-group">
                 <label asp-for="Desde" class="control-label"></label>
@@ -29,9 +27,14 @@
                 <span asp-validation-for="Hasta" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Motivo" class="control-label"></label>
-                <input asp-for="Motivo" class="form-control" />
-                <span asp-validation-for="Motivo" class="text-danger"></span>
+                <label asp-for="AnioCorrespondiente" class="control-label"></label>
+                <input asp-for="AnioCorrespondiente" class="form-control" />
+                <span asp-validation-for="AnioCorrespondiente" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Completa" /> @Html.DisplayNameFor(model => model.Completa)
+                </label>
             </div>
             <div class="form-group">
                 <label asp-for="Comentarios" class="control-label"></label>

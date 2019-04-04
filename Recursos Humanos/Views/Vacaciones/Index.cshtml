@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Recursos_Humanos.Models.Procesos.Licencia>
+﻿@model IEnumerable<Recursos_Humanos.Models.Procesos.Vacacion>
 
 @{
     ViewData["Title"] = "Index";
@@ -14,7 +14,6 @@
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Empleado)
-
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Desde)
@@ -23,7 +22,10 @@
                 @Html.DisplayNameFor(model => model.Hasta)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Motivo)
+                @Html.DisplayNameFor(model => model.AnioCorrespondiente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Completa)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Comentarios)
@@ -35,8 +37,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Empleado.Apellido)
-
+                @{
+                    ViewData["Concatenacion"] = item.Empleado.Nombre + " " + item.Empleado.Apellido;
+                }
+                @ViewData["Concatenacion"]
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Desde)
@@ -45,7 +49,10 @@
                 @Html.DisplayFor(modelItem => item.Hasta)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Motivo)
+                @Html.DisplayFor(modelItem => item.AnioCorrespondiente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Completa)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Comentarios)

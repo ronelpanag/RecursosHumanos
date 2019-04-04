@@ -161,6 +161,13 @@ namespace Recursos_Humanos.Controllers
             return RedirectToAction("Create", "Salidas", id);
         }
 
+        public async Task<IActionResult> EmpleadoActivos()
+        {
+            var listado = from e in _context.Empleados where e.Estado == true select e;
+            return View(await listado.ToListAsync());
+        }
+
+
         private bool EmpleadoExists(int id)
         {
             return _context.Empleados.Any(e => e.Id == id);

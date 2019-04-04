@@ -1,29 +1,25 @@
-﻿@model IEnumerable<Recursos_Humanos.Models.Procesos.Licencia>
+﻿@model IEnumerable<Recursos_Humanos.Models.Procesos.Permiso>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Permisos";
 }
 
-<h1>Index</h1>
-
+<h1>Listado de permisos</h1>
+<hr />
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-outline-primary">Crear nuevo</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Empleado)
-
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Desde)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Hasta)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Motivo)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Comentarios)
@@ -35,17 +31,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Empleado.Apellido)
-
+                @{
+                    ViewData["Concatenacion"] = item.Empleado.Nombre + " " + item.Empleado.Apellido;
+                }
+                @ViewData["Concatenacion"]
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Desde)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Hasta)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Motivo)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Comentarios)

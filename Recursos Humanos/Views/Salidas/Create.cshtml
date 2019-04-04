@@ -1,42 +1,36 @@
-﻿@model Recursos_Humanos.Models.Procesos.Licencia
+﻿@model Recursos_Humanos.Models.Procesos.Salida
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Crear salida</h1>
 
-<h4>Licencia</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-
                 <label asp-for="EmpleadoId" class="control-label"></label>
                 <select asp-for="EmpleadoId" class ="form-control" asp-items="ViewBag.EmpleadoId"></select>
-
             </div>
             <div class="form-group">
-                <label asp-for="Desde" class="control-label"></label>
-                <input asp-for="Desde" class="form-control" />
-                <span asp-validation-for="Desde" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Hasta" class="control-label"></label>
-                <input asp-for="Hasta" class="form-control" />
-                <span asp-validation-for="Hasta" class="text-danger"></span>
+                <label asp-for="TipoSalida" class="control-label"></label></br>
+                <input type="radio" value="Desahucio" asp-for="TipoSalida" class="" />Desahucio
+                <input type="radio" value="Despido" asp-for="TipoSalida" class="" />Despido
+                <input type="radio" value="Renuncia" asp-for="TipoSalida" class="" />Renuncia
+                <span asp-validation-for="TipoSalida" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Motivo" class="control-label"></label>
-                <input asp-for="Motivo" class="form-control" />
+                <textarea asp-for="Motivo" class="form-control"></textarea>
                 <span asp-validation-for="Motivo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Comentarios" class="control-label"></label>
-                <input asp-for="Comentarios" class="form-control" />
-                <span asp-validation-for="Comentarios" class="text-danger"></span>
+                <label asp-for="FechaSalida" class="control-label"></label>
+                <input asp-for="FechaSalida" class="form-control" />
+                <span asp-validation-for="FechaSalida" type="date" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
