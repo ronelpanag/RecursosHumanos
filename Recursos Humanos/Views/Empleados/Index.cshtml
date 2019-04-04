@@ -19,19 +19,10 @@
                 @Html.DisplayNameFor(model => model.Apellido)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Telefono)
+                @Html.DisplayNameFor(model => model.Departamento)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CodigoDepartamento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CodigoCargo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FerchaIngreso)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Salario)
+                @Html.DisplayNameFor(model => model.Cargo)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Estado)
@@ -49,22 +40,23 @@
                 @Html.DisplayFor(modelItem => item.Apellido)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Telefono)
+                @Html.DisplayFor(modelItem => item.Departamento.CodigoDepartamento)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CodigoDepartamento)
+                @Html.DisplayFor(modelItem => item.Cargo.Descripcion)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CodigoCargo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FerchaIngreso)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Salario)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estado)
+                @{ 
+                    if (item.Estado)
+                    {
+                        ViewData["Estado"] = "Activo";
+                    }
+                    else
+                    {
+                        ViewData["Estado"] = "Inactivo";
+                    }
+                }
+                @ViewData["Estado"]
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

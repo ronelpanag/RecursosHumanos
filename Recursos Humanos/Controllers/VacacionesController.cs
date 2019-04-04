@@ -10,23 +10,23 @@ using Recursos_Humanos.Models.Procesos;
 
 namespace Recursos_Humanos.Controllers
 {
-    public class LicenciasController : Controller
+    public class VacacionesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public LicenciasController(ApplicationDbContext context)
+        public VacacionesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Licencias
+        // GET: Vacaciones
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Licencias.Include(l => l.Empleado);
+            var applicationDbContext = _context.Vacaciones.Include(v => v.Empleado);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Licencias/Details/5
+        // GET: Vacaciones/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,42 +34,42 @@ namespace Recursos_Humanos.Controllers
                 return NotFound();
             }
 
-            var licencia = await _context.Licencias
-                .Include(l => l.Empleado)
+            var vacacion = await _context.Vacaciones
+                .Include(v => v.Empleado)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (licencia == null)
+            if (vacacion == null)
             {
                 return NotFound();
             }
 
-            return View(licencia);
+            return View(vacacion);
         }
 
-        // GET: Licencias/Create
+        // GET: Vacaciones/Create
         public IActionResult Create()
         {
             ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "Id", "Apellido");
             return View();
         }
 
-        // POST: Licencias/Create
+        // POST: Vacaciones/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,EmpleadoId,Desde,Hasta,Motivo,Comentarios")] Licencia licencia)
+        public async Task<IActionResult> Create([Bind("Id,EmpleadoId,Desde,Hasta,AnioCorrespondiente,Completa,Comentarios")] Vacacion vacacion)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(licencia);
+                _context.Add(vacacion);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "Id", "Apellido", licencia.EmpleadoId);
-            return View(licencia);
+            ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "Id", "Apellido", vacacion.EmpleadoId);
+            return View(vacacion);
         }
 
-        // GET: Licencias/Edit/5
+        // GET: Vacaciones/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -77,23 +77,23 @@ namespace Recursos_Humanos.Controllers
                 return NotFound();
             }
 
-            var licencia = await _context.Licencias.FindAsync(id);
-            if (licencia == null)
+            var vacacion = await _context.Vacaciones.FindAsync(id);
+            if (vacacion == null)
             {
                 return NotFound();
             }
-            ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "Id", "Apellido", licencia.EmpleadoId);
-            return View(licencia);
+            ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "Id", "Apellido", vacacion.EmpleadoId);
+            return View(vacacion);
         }
 
-        // POST: Licencias/Edit/5
+        // POST: Vacaciones/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,EmpleadoId,Desde,Hasta,Motivo,Comentarios")] Licencia licencia)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,EmpleadoId,Desde,Hasta,AnioCorrespondiente,Completa,Comentarios")] Vacacion vacacion)
         {
-            if (id != licencia.Id)
+            if (id != vacacion.Id)
             {
                 return NotFound();
             }
@@ -102,12 +102,12 @@ namespace Recursos_Humanos.Controllers
             {
                 try
                 {
-                    _context.Update(licencia);
+                    _context.Update(vacacion);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!LicenciaExists(licencia.Id))
+                    if (!VacacionExists(vacacion.Id))
                     {
                         return NotFound();
                     }
@@ -118,11 +118,11 @@ namespace Recursos_Humanos.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "Id", "Apellido", licencia.EmpleadoId);
-            return View(licencia);
+            ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "Id", "Apellido", vacacion.EmpleadoId);
+            return View(vacacion);
         }
 
-        // GET: Licencias/Delete/5
+        // GET: Vacaciones/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -130,31 +130,31 @@ namespace Recursos_Humanos.Controllers
                 return NotFound();
             }
 
-            var licencia = await _context.Licencias
-                .Include(l => l.Empleado)
+            var vacacion = await _context.Vacaciones
+                .Include(v => v.Empleado)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (licencia == null)
+            if (vacacion == null)
             {
                 return NotFound();
             }
 
-            return View(licencia);
+            return View(vacacion);
         }
 
-        // POST: Licencias/Delete/5
+        // POST: Vacaciones/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var licencia = await _context.Licencias.FindAsync(id);
-            _context.Licencias.Remove(licencia);
+            var vacacion = await _context.Vacaciones.FindAsync(id);
+            _context.Vacaciones.Remove(vacacion);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool LicenciaExists(int id)
+        private bool VacacionExists(int id)
         {
-            return _context.Licencias.Any(e => e.Id == id);
+            return _context.Vacaciones.Any(e => e.Id == id);
         }
     }
 }

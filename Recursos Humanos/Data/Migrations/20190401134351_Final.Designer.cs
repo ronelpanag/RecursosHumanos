@@ -10,8 +10,8 @@ using Recursos_Humanos.Data;
 namespace Recursos_Humanos.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190329090019_Inicial")]
-    partial class Inicial
+    [Migration("20190401134351_Final")]
+    partial class Final
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -192,11 +192,10 @@ namespace Recursos_Humanos.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CodigoDepartamento");
+                    b.Property<int>("DepartamentoId");
 
-                    b.Property<int?>("DepartamentoId");
-
-                    b.Property<string>("Descripcion");
+                    b.Property<string>("Descripcion")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -211,9 +210,11 @@ namespace Recursos_Humanos.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CodigoDepartamento");
+                    b.Property<string>("CodigoDepartamento")
+                        .IsRequired();
 
-                    b.Property<string>("NombreDepartamento");
+                    b.Property<string>("NombreDepartamento")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -231,13 +232,9 @@ namespace Recursos_Humanos.Data.Migrations
 
                     b.Property<int>("CargoId");
 
-                    b.Property<int>("CodigoCargo");
-
-                    b.Property<int>("CodigoDepartamento");
-
                     b.Property<int>("DepartamentoId");
 
-                    b.Property<int>("Estado");
+                    b.Property<bool>("Estado");
 
                     b.Property<DateTime>("FerchaIngreso");
 
@@ -264,17 +261,17 @@ namespace Recursos_Humanos.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CodigoEmpleado");
-
-                    b.Property<string>("Comentarios");
+                    b.Property<string>("Comentarios")
+                        .IsRequired();
 
                     b.Property<DateTime>("Desde");
 
-                    b.Property<int?>("EmpleadoId");
+                    b.Property<int>("EmpleadoId");
 
                     b.Property<DateTime>("Hasta");
 
-                    b.Property<string>("Motivo");
+                    b.Property<string>("Motivo")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -308,13 +305,12 @@ namespace Recursos_Humanos.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CodigoEmpleado");
-
-                    b.Property<string>("Comentarios");
+                    b.Property<string>("Comentarios")
+                        .IsRequired();
 
                     b.Property<DateTime>("Desde");
 
-                    b.Property<int?>("EmpleadoId");
+                    b.Property<int>("EmpleadoId");
 
                     b.Property<DateTime>("Hasta");
 
@@ -331,15 +327,15 @@ namespace Recursos_Humanos.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CodigoEmpleado");
-
-                    b.Property<int?>("EmpleadoId");
+                    b.Property<int>("EmpleadoId");
 
                     b.Property<DateTime>("FechaSalida");
 
-                    b.Property<string>("Motivo");
+                    b.Property<string>("Motivo")
+                        .IsRequired();
 
-                    b.Property<string>("TipoSalida");
+                    b.Property<string>("TipoSalida")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -356,15 +352,14 @@ namespace Recursos_Humanos.Data.Migrations
 
                     b.Property<int>("AnioCorrespondiente");
 
-                    b.Property<int>("CodigoEmpleado");
-
-                    b.Property<string>("Comentarios");
+                    b.Property<string>("Comentarios")
+                        .IsRequired();
 
                     b.Property<bool>("Completa");
 
                     b.Property<DateTime>("Desde");
 
-                    b.Property<int?>("EmpleadoId");
+                    b.Property<int>("EmpleadoId");
 
                     b.Property<DateTime>("Hasta");
 
@@ -424,7 +419,8 @@ namespace Recursos_Humanos.Data.Migrations
                 {
                     b.HasOne("Recursos_Humanos.Models.Colaboradores.Departamento", "Departamento")
                         .WithMany()
-                        .HasForeignKey("DepartamentoId");
+                        .HasForeignKey("DepartamentoId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Recursos_Humanos.Models.Colaboradores.Empleado", b =>
@@ -444,28 +440,32 @@ namespace Recursos_Humanos.Data.Migrations
                 {
                     b.HasOne("Recursos_Humanos.Models.Colaboradores.Empleado", "Empleado")
                         .WithMany()
-                        .HasForeignKey("EmpleadoId");
+                        .HasForeignKey("EmpleadoId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Recursos_Humanos.Models.Procesos.Permiso", b =>
                 {
                     b.HasOne("Recursos_Humanos.Models.Colaboradores.Empleado", "Empleado")
                         .WithMany()
-                        .HasForeignKey("EmpleadoId");
+                        .HasForeignKey("EmpleadoId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Recursos_Humanos.Models.Procesos.Salida", b =>
                 {
                     b.HasOne("Recursos_Humanos.Models.Colaboradores.Empleado", "Empleado")
                         .WithMany()
-                        .HasForeignKey("EmpleadoId");
+                        .HasForeignKey("EmpleadoId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Recursos_Humanos.Models.Procesos.Vacacion", b =>
                 {
                     b.HasOne("Recursos_Humanos.Models.Colaboradores.Empleado", "Empleado")
                         .WithMany()
-                        .HasForeignKey("EmpleadoId");
+                        .HasForeignKey("EmpleadoId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

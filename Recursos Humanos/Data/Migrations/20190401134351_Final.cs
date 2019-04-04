@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Recursos_Humanos.Data.Migrations
 {
-    public partial class Inicial : Migration
+    public partial class Final : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,8 +14,8 @@ namespace Recursos_Humanos.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CodigoDepartamento = table.Column<string>(nullable: true),
-                    NombreDepartamento = table.Column<string>(nullable: true)
+                    CodigoDepartamento = table.Column<string>(nullable: false),
+                    NombreDepartamento = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -44,9 +44,8 @@ namespace Recursos_Humanos.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Descripcion = table.Column<string>(nullable: true),
-                    DepartamentoId = table.Column<int>(nullable: true),
-                    CodigoDepartamento = table.Column<int>(nullable: false)
+                    Descripcion = table.Column<string>(nullable: false),
+                    DepartamentoId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -56,7 +55,7 @@ namespace Recursos_Humanos.Data.Migrations
                         column: x => x.DepartamentoId,
                         principalTable: "Departamentos",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -69,12 +68,10 @@ namespace Recursos_Humanos.Data.Migrations
                     Apellido = table.Column<string>(nullable: false),
                     Telefono = table.Column<string>(nullable: false),
                     DepartamentoId = table.Column<int>(nullable: false),
-                    CodigoDepartamento = table.Column<int>(nullable: false),
                     CargoId = table.Column<int>(nullable: false),
-                    CodigoCargo = table.Column<int>(nullable: false),
                     FerchaIngreso = table.Column<DateTime>(nullable: false),
                     Salario = table.Column<double>(nullable: false),
-                    Estado = table.Column<int>(nullable: false)
+                    Estado = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -90,7 +87,7 @@ namespace Recursos_Humanos.Data.Migrations
                         column: x => x.DepartamentoId,
                         principalTable: "Departamentos",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -99,12 +96,11 @@ namespace Recursos_Humanos.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    EmpleadoId = table.Column<int>(nullable: true),
-                    CodigoEmpleado = table.Column<int>(nullable: false),
+                    EmpleadoId = table.Column<int>(nullable: false),
                     Desde = table.Column<DateTime>(nullable: false),
                     Hasta = table.Column<DateTime>(nullable: false),
-                    Motivo = table.Column<string>(nullable: true),
-                    Comentarios = table.Column<string>(nullable: true)
+                    Motivo = table.Column<string>(nullable: false),
+                    Comentarios = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -114,7 +110,7 @@ namespace Recursos_Humanos.Data.Migrations
                         column: x => x.EmpleadoId,
                         principalTable: "Empleados",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -123,11 +119,10 @@ namespace Recursos_Humanos.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    EmpleadoId = table.Column<int>(nullable: true),
-                    CodigoEmpleado = table.Column<int>(nullable: false),
+                    EmpleadoId = table.Column<int>(nullable: false),
                     Desde = table.Column<DateTime>(nullable: false),
                     Hasta = table.Column<DateTime>(nullable: false),
-                    Comentarios = table.Column<string>(nullable: true)
+                    Comentarios = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -137,7 +132,7 @@ namespace Recursos_Humanos.Data.Migrations
                         column: x => x.EmpleadoId,
                         principalTable: "Empleados",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -146,10 +141,9 @@ namespace Recursos_Humanos.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    EmpleadoId = table.Column<int>(nullable: true),
-                    CodigoEmpleado = table.Column<int>(nullable: false),
-                    TipoSalida = table.Column<string>(nullable: true),
-                    Motivo = table.Column<string>(nullable: true),
+                    EmpleadoId = table.Column<int>(nullable: false),
+                    TipoSalida = table.Column<string>(nullable: false),
+                    Motivo = table.Column<string>(nullable: false),
                     FechaSalida = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
@@ -160,7 +154,7 @@ namespace Recursos_Humanos.Data.Migrations
                         column: x => x.EmpleadoId,
                         principalTable: "Empleados",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -169,13 +163,12 @@ namespace Recursos_Humanos.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    EmpleadoId = table.Column<int>(nullable: true),
-                    CodigoEmpleado = table.Column<int>(nullable: false),
+                    EmpleadoId = table.Column<int>(nullable: false),
                     Desde = table.Column<DateTime>(nullable: false),
                     Hasta = table.Column<DateTime>(nullable: false),
                     AnioCorrespondiente = table.Column<int>(nullable: false),
                     Completa = table.Column<bool>(nullable: false),
-                    Comentarios = table.Column<string>(nullable: true)
+                    Comentarios = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -185,7 +178,7 @@ namespace Recursos_Humanos.Data.Migrations
                         column: x => x.EmpleadoId,
                         principalTable: "Empleados",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

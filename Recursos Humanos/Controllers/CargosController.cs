@@ -22,7 +22,8 @@ namespace Recursos_Humanos.Controllers
         // GET: Cargos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Cargos.ToListAsync());
+            var applicationDbContext = _context.Cargos.Include(c => c.Departamento);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Cargos/Details/5
@@ -34,6 +35,7 @@ namespace Recursos_Humanos.Controllers
             }
 
             var cargo = await _context.Cargos
+                .Include(c => c.Departamento)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (cargo == null)
             {
@@ -46,6 +48,7 @@ namespace Recursos_Humanos.Controllers
         // GET: Cargos/Create
         public IActionResult Create()
         {
+            ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "CodigoDepartamento");
             return View();
         }
 
@@ -54,7 +57,7 @@ namespace Recursos_Humanos.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Descripcion,CodigoDepartamento")] Cargo cargo)
+        public async Task<IActionResult> Create([Bind("Id,Descripcion,DepartamentoId")] Cargo cargo)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +65,7 @@ namespace Recursos_Humanos.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "CodigoDepartamento", cargo.DepartamentoId);
             return View(cargo);
         }
 
@@ -78,6 +82,7 @@ namespace Recursos_Humanos.Controllers
             {
                 return NotFound();
             }
+            ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "CodigoDepartamento", cargo.DepartamentoId);
             return View(cargo);
         }
 
@@ -86,7 +91,7 @@ namespace Recursos_Humanos.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Descripcion,CodigoDepartamento")] Cargo cargo)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Descripcion,DepartamentoId")] Cargo cargo)
         {
             if (id != cargo.Id)
             {
@@ -113,6 +118,7 @@ namespace Recursos_Humanos.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "CodigoDepartamento", cargo.DepartamentoId);
             return View(cargo);
         }
 
@@ -125,6 +131,7 @@ namespace Recursos_Humanos.Controllers
             }
 
             var cargo = await _context.Cargos
+                .Include(c => c.Departamento)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (cargo == null)
             {

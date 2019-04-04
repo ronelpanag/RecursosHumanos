@@ -22,6 +22,9 @@ namespace Recursos_Humanos.Controllers
         // GET: Nominas
         public async Task<IActionResult> Index()
         {
+            var montos = from n in _context.Nominas select n.MontoTotal;
+            double total = montos.Sum();
+            ViewData["Nomina"] = total.ToString();
             return View(await _context.Nominas.ToListAsync());
         }
 
@@ -46,7 +49,10 @@ namespace Recursos_Humanos.Controllers
         // GET: Nominas/Create
         public IActionResult Create()
         {
-            return View();
+            Nomina nomina = new Nomina();
+            var monto = (from e in _context.Empleados where e.Estado == true select e.Salario);
+            nomina.MontoTotal = monto.Sum();
+            return View(nomina);
         }
 
         // POST: Nominas/Create
@@ -58,6 +64,8 @@ namespace Recursos_Humanos.Controllers
         {
             if (ModelState.IsValid)
             {
+                var monto = (from e in _context.Empleados where e.Estado == true select e.Salario);
+                nomina.MontoTotal = monto.Sum();
                 _context.Add(nomina);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

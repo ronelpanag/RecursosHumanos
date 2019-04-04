@@ -4,9 +4,7 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Empleado</h4>
+<h1>Editar Empleado</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -29,14 +27,14 @@
                 <span asp-validation-for="Telefono" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CodigoDepartamento" class="control-label"></label>
-                <input asp-for="CodigoDepartamento" class="form-control" />
-                <span asp-validation-for="CodigoDepartamento" class="text-danger"></span>
+                <label asp-for="DepartamentoId" class="control-label"></label>
+                <select asp-for="DepartamentoId" class="form-control" asp-items="ViewBag.DepartamentoId"></select>
+                <span asp-validation-for="DepartamentoId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CodigoCargo" class="control-label"></label>
-                <input asp-for="CodigoCargo" class="form-control" />
-                <span asp-validation-for="CodigoCargo" class="text-danger"></span>
+                <label asp-for="CargoId" class="control-label"></label>
+                <select asp-for="CargoId" class="form-control" asp-items="ViewBag.CargoId"></select>
+                <span asp-validation-for="CargoId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="FerchaIngreso" class="control-label"></label>
@@ -48,10 +46,10 @@
                 <input asp-for="Salario" class="form-control" />
                 <span asp-validation-for="Salario" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Estado" class="control-label"></label>
-                <input asp-for="Estado" class="form-control" />
-                <span asp-validation-for="Estado" class="text-danger"></span>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Estado" value="true" disabled="disabled"/> @Html.DisplayNameFor(model => model.Estado)
+                </label>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
@@ -61,7 +59,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Volver a la lista</a>
 </div>
 
 @section Scripts {

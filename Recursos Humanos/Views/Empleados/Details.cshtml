@@ -29,16 +29,16 @@
             @Html.DisplayFor(model => model.Telefono)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CodigoDepartamento)
+            @Html.DisplayNameFor(model => model.Departamento)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CodigoDepartamento)
+            @Html.DisplayFor(model => model.Departamento.CodigoDepartamento)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CodigoCargo)
+            @Html.DisplayNameFor(model => model.Cargo)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CodigoCargo)
+            @Html.DisplayFor(model => model.Cargo.Descripcion)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.FerchaIngreso)
@@ -62,5 +62,5 @@
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Volver a la lista</a>
 </div>
