@@ -153,6 +153,7 @@ namespace Recursos_Humanos.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+     
         private bool NominaExists(int id)
         {
             return _context.Nominas.Any(e => e.Id == id);

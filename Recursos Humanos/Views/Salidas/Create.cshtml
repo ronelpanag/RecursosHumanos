@@ -16,13 +16,15 @@
                 <select asp-for="EmpleadoId" class ="form-control" asp-items="ViewBag.EmpleadoId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="TipoSalida" class="control-label"></label>
-                <input asp-for="TipoSalida" class="form-control" />
+                <label asp-for="TipoSalida" class="control-label"></label></br>
+                <input type="radio" value="Desahucio" asp-for="TipoSalida" class="" />Desahucio
+                <input type="radio" value="Despido" asp-for="TipoSalida" class="" />Despido
+                <input type="radio" value="Renuncia" asp-for="TipoSalida" class="" />Renuncia
                 <span asp-validation-for="TipoSalida" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Motivo" class="control-label"></label>
-                <input asp-for="Motivo" class="form-control" />
+                <textarea asp-for="Motivo" class="form-control"></textarea>
                 <span asp-validation-for="Motivo" class="text-danger"></span>
             </div>
             <div class="form-group">

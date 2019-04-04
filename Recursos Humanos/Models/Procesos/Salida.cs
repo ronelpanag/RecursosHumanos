@@ -23,7 +23,7 @@ namespace Recursos_Humanos.Models.Procesos
         public string Motivo { get; set; }
         [Required]
         [DataType(DataType.Date)]
-        [DisplayName("Fecba de Salida")]
+        [DisplayName("Fecha de Salida")]
         public DateTime FechaSalida { get; set; }
     }
 }

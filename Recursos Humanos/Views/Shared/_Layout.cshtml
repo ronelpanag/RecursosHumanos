@@ -33,7 +33,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
                         </li>
-                        
+
                     </ul>
                 </div>
             </div>
@@ -48,7 +48,7 @@
 
     <footer class="border-top footer shadow-box text-muted">
         <div class="container">
-            &copy; 2019 - Recursos Humanos - Hecho por Ronel Pantaleon - 2017-4877 - <i>Instituto Tecnol&oacute;gico de Las Americas, ITLA</i>
+            &copy; @DateTime.Today.Year - Recursos Humanos - Hecho por Ronel Pantaleon - 2017-4877 - <i>Instituto Tecnol&oacute;gico de Las Americas, ITLA</i>
         </div>
     </footer>
 
@@ -56,7 +56,7 @@
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script type="text/javascript">
+        <!--script type="text/javascript">
             google.charts.load('current', { 'packages': ['bar'] });
             google.charts.setOnLoadCallback(drawChart);
 
@@ -80,7 +80,7 @@
 
                 chart.draw(data, google.charts.Bar.convertOptions(options));
             }
-        </script>
+        </script-->
 
     </environment>
     <environment exclude="Development">
@@ -98,6 +98,41 @@
         </script>
     </environment>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['bar'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Mes', 'Total', 'Activos', 'Inactivos'],
+                ['Enero', 1000, 400, 200],
+                ['Febrero', 1170, 460, 250],
+                ['Marzo', 660, 1120, 300],
+                ['Abril', 1030, 540, 350],
+                ['Mayo', 1030, 540, 350],
+                ['Junio', 1030, 540, 350],
+                ['Julio', 1030, 540, 350],
+                ['Agosto', 1030, 540, 350],
+                ['Septiembre', 1030, 540, 350],
+                ['Octubre', 1030, 540, 350],
+                ['Noviembre', 1030, 540, 350],
+                ['Diciembre', 1030, 540, 350]
+            ]);
+
+            var options = {
+                chart: {
+                    title: 'Reporte de empleados',
+                    subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+                }
+            };
+
+            var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+            chart.draw(data, google.charts.Bar.convertOptions(options));
+        }
+    </script>
+
 
     @RenderSection("Scripts", required: false)
 </body>
