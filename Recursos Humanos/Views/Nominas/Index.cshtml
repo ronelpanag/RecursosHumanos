@@ -8,6 +8,7 @@
 <hr />
 <p>
     <a asp-action="Create" class="btn btn-outline-primary">Create New</a>
+
 </p>
 <table class="table">
     <thead>
@@ -41,6 +42,7 @@
             </td>
             <td>
                 RD$ @Html.DisplayFor(modelItem => item.MontoTotal)
+
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
@@ -59,4 +61,5 @@
             <td><b><i>RD$ @ViewData["Nomina"]</i></b></td>
         </tr>
     </tfoot>
+
 </table>
