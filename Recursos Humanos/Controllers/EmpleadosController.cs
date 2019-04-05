@@ -163,10 +163,15 @@ namespace Recursos_Humanos.Controllers
 
         public async Task<IActionResult> EmpleadoActivos()
         {
-            var listado = from e in _context.Empleados where e.Estado == true select e;
-            return View(await listado.ToListAsync());
+            var listado = (from e in _context.Empleados where e.Estado == true select e).ToListAsync();
+            return View(await listado);
         }
 
+        public async Task<IActionResult> EmpleadosInactivos()
+        {
+            var empleados = (from e in _context.Empleados where e.Estado == false select e).ToListAsync();
+            return View(await empleados);
+        }
 
         private bool EmpleadoExists(int id)
         {
