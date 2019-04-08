@@ -4,15 +4,20 @@ Proyecto final de Programacion 3, enfocado a un sistema de RRHH, utilizando ASP:
 
 PROYECTO FINAL
 APLICACIÓN DE GESTIÓN DE RECURSOS HUMANOS.
+
 MÓDULO DE MANTENIMIENTOS
 Este módulo consiste en crear formularios que alimentes sendas tablas.
 Empleados.
 (Id, Código Empleado, Nombre, Apellido, Teléfono, Departamento, Cargo, Fecha ingreso,
 Salario, Estatus (Activo/Inactivo))
+
 Departamentos
 (Id, Código Departamento, Nombre)
+
 Cargos
 (Id, Cargo)
+
+
 MÓDULO DE PROCESOS
 En este módulo se van a configurar algunos procesos o acciones. Vale decir que estos procesos
 o acciones son registrados en respectivas tablas
