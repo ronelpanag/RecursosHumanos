@@ -3,7 +3,9 @@ Proyecto final de Programacion 3, enfocado a un sistema de RRHH, utilizando ASP:
 
 
 MÓDULO DE MANTENIMIENTOS
+
 Este módulo consiste en crear formularios que alimentes sendas tablas.
+
 Empleados.
 (Id, Código Empleado, Nombre, Apellido, Teléfono, Departamento, Cargo, Fecha ingreso,
 Salario, Estatus (Activo/Inactivo))
