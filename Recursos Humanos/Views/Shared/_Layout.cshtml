@@ -102,28 +102,30 @@
         google.charts.load('current', { 'packages': ['bar'] });
         google.charts.setOnLoadCallback(drawChart);
 
-        
+       
+
+
         function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-                ['Mes', 'Total', 'Activos', 'Inactivos'],
-                ['Enero', 1000, 400, 200],
-                ['Febrero', 1170, 460, 250],
-                ['Marzo', 660, 1120, 300],
-                ['Abril', 1030, 540, 350],
-                ['Mayo', 1030, 540, 350],
-                ['Junio', 1030, 540, 350],
-                ['Julio', 1030, 540, 350],
-                ['Agosto', 1030, 540, 350],
-                ['Septiembre', 1030, 540, 350],
-                ['Octubre', 1030, 540, 350],
-                ['Noviembre', 1030, 540, 350],
-                ['Diciembre', 1030, 540, 350]
-            ]);
+            var jsonData = $.ajax({
+                url: '@Url.Action("EstadisticasEmpleados", "Empleados")',
+                dataType: "json",
+                async: false
+            });
+
+            // Create our data table out of JSON data loaded from server.
+            var data = new google.visualization.DataTable();
+                data.addColumn("string", "Mes");
+            data.addColumn("number", "Total");
+            data.addColumn("number", "Activos");
+            data.addColumn("number", "Inactivos");
+            data.addRows(jsonData);
+         
+
 
             var options = {
                 chart: {
                     title: 'Reporte de empleados',
-                    subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+                    subtitle: 'Empleados activos, entradas y salidas por mes.',
                 }
             };
 

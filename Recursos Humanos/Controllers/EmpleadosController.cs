@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Recursos_Humanos.Data;
 using Recursos_Humanos.Models.Colaboradores;
+using Recursos_Humanos.Models.Informes;
 
 namespace Recursos_Humanos.Controllers
 {
@@ -163,10 +165,96 @@ namespace Recursos_Humanos.Controllers
 
         public async Task<IActionResult> EmpleadoActivos()
         {
-            var listado = from e in _context.Empleados where e.Estado == true select e;
-            return View(await listado.ToListAsync());
+            var listado = (from e in _context.Empleados where e.Estado == true select e).ToListAsync();
+            return View(await listado);
         }
 
+        public async Task<IActionResult> EmpleadosInactivos()
+        {
+            var listado = (from e in _context.Empleados where e.Estado == false select e).ToListAsync();
+            return View(await listado);
+        }
+
+        public JsonResult EstadisticasEmpleados()
+        {
+            DataTable dataTable = new DataTable();
+            DataColumn dataColumn = new DataColumn("Mes", typeof(string));
+            DataColumn dataColumn1 = new DataColumn("Empleados activos", typeof(int));
+            DataColumn dataColumn2 = new DataColumn("Entradas", typeof(int));
+            DataColumn dataColumn3 = new DataColumn("Salidas", typeof(int));
+            dataTable.Columns.Add(dataColumn);
+            dataTable.Columns.Add(dataColumn1);
+            dataTable.Columns.Add(dataColumn2);
+            dataTable.Columns.Add(dataColumn3);
+
+            var data = new List<Estadisticas>();
+            for(int x = 1; x <= 12; x++)
+            {
+                int total = (from e in _context.Empleados
+                                 where e.FerchaIngreso.Year == DateTime.Today.Year && e.FerchaIngreso.Month == x
+                                 select e
+                             ).Count();
+                int activos = (from e in _context.Empleados
+                                    where e.Estado == true && e.FerchaIngreso.Month == x
+                                    select e
+                              ).Count();
+                int inactivos = (from e in _context.Empleados
+                                 join s in _context.Salidas on e.Id equals s.EmpleadoId
+                                        where e.Estado == false && s.FechaSalida.Month == x
+                                        select e
+                                ).Count();
+
+                switch (x)
+                {
+                    case 1:
+                        data.Add(new Estadisticas("Enero", total, activos, inactivos));
+                        break;
+                    case 2:
+                       data.Add(new Estadisticas("Febrero", total, activos, inactivos));
+                        break;
+                    case 3:
+                       data.Add(new Estadisticas("Marzo", total, activos, inactivos));
+                        break;
+                    case 4:
+                       data.Add(new Estadisticas("Abril", total, activos, inactivos));
+                        break;
+                    case 5:
+                       data.Add(new Estadisticas("Mayo", total, activos, inactivos));
+                        break;
+                    case 6:
+                       data.Add(new Estadisticas("Junio", total, activos, inactivos));
+                        break;
+                    case 7:
+                       data.Add(new Estadisticas("Julio", total, activos, inactivos));
+                        break;
+                    case 8:
+                       data.Add(new Estadisticas("Agosto", total, activos, inactivos));
+                        break;
+                    case 9:
+                       data.Add(new Estadisticas("Septiembre", total, activos, inactivos));
+                        break;
+                    case 10:
+                       data.Add(new Estadisticas("Octubre", total, activos, inactivos));
+                        break;
+                    case 11:
+                       data.Add(new Estadisticas("Noviembre", total, activos, inactivos));
+                        break;
+                    case 12:
+                       data.Add(new Estadisticas("Diciembre", total, activos, inactivos));
+                        break;
+                    default:
+                        Console.WriteLine("Error en las estadisticas");
+                        break;
+                }
+            }
+
+            for (int x = 0; x < data.Count; x++)
+            {
+                var y = data.ElementAt(x);
+                dataTable.Rows.Add(y.Mes, y.Total, y.Activos, y.Inactivos);
+            }
+            return Json(dataTable);
+        }
 
         private bool EmpleadoExists(int id)
         {
