@@ -66,9 +66,17 @@ namespace Recursos_Humanos.Controllers
         {
             if (ModelState.IsValid)
             {
-                int id = 0;
-                id = ((from e in _context.Empleados select e.Id).Last() + 1);
-                empleado.Id = id;
+                //int id = 0;
+                //if(_context.Empleados.Count() == 0) 
+                //{
+                //    id = 1;
+                //}
+                //else
+                //{
+                //    id = ((from e in _context.Empleados select e.Id).Last() + 1);
+                //}
+
+                //empleado.Id = id;
                 empleado.Estado = true;
                 _context.Add(empleado);
                 await _context.SaveChangesAsync();
@@ -194,7 +202,7 @@ namespace Recursos_Humanos.Controllers
             for(int x = 1; x <= 12; x++)
             {
                 int total = (from e in _context.Empleados
-                                 where e.FerchaIngreso.Year == DateTime.Today.Year && e.FerchaIngreso.Month == x
+                                 where e.FerchaIngreso.Year == DateTime.Today.Year && e.FerchaIngreso.Month < (x+1)
                                  select e
                              ).Count();
                 int activos = (from e in _context.Empleados
@@ -256,7 +264,7 @@ namespace Recursos_Humanos.Controllers
                 var y = data.ElementAt(x);
                 dataTable.Rows.Add(y.Mes, y.Total, y.Activos, y.Inactivos);
             }
-            return Json(dataTable);
+            return Json(data);
 
         }
 

@@ -56,31 +56,7 @@
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <!--script type="text/javascript">
-            google.charts.load('current', { 'packages': ['bar'] });
-            google.charts.setOnLoadCallback(drawChart);
-
-            function drawChart() {
-                var data = google.visualization.arrayToDataTable([
-                    ['Year', 'Sales', 'Expenses', 'Profit'],
-                    ['2014', 1000, 400, 200],
-                    ['2015', 1170, 460, 250],
-                    ['2016', 660, 1120, 300],
-                    ['2017', 1030, 540, 350]
-                ]);
-
-                var options = {
-                    chart: {
-                        title: 'Company Performance',
-                        subtitle: 'Sales, Expenses, and Profit: 2014-2017',
-                    }
-                };
-
-                var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-
-                chart.draw(data, google.charts.Bar.convertOptions(options));
-            }
-        </script-->
+        
 
     </environment>
     <environment exclude="Development">
@@ -101,24 +77,37 @@
     <script type="text/javascript">
         google.charts.load('current', { 'packages': ['bar'] });
         google.charts.setOnLoadCallback(drawChart);
-
+        var jsonData = $.ajax({
+                url: '@Url.Action("EstadisticasEmpleados", "Empleados")',
+                dataType: "json",
+                async: false
+            }).responseJSON;
        
 
 
         function drawChart() {
-            var jsonData = $.ajax({
-                url: '@Url.Action("EstadisticasEmpleados", "Empleados")',
-                dataType: "json",
-                async: false
-            });
 
+            var array = Array.from(jsonData);
+            
             // Create our data table out of JSON data loaded from server.
             var data = new google.visualization.DataTable();
-                data.addColumn("string", "Mes");
-            data.addColumn("number", "Total");
+            data.addColumn("string", "Mes");
             data.addColumn("number", "Activos");
             data.addColumn("number", "Inactivos");
-            data.addRows(jsonData);
+            data.addColumn("number", "Total");
+            if (Array.isArray(array)) {
+                let x = 0;
+                while (x < 12) {
+                    let obj = Object.values(array[x]);
+                    console.log(obj);
+                    data.addRow(Object.values(array[x]));
+                    
+                    x++;
+                }
+            }
+
+
+
          
 
 
