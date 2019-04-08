@@ -20,8 +20,9 @@ namespace Recursos_Humanos.Controllers
         }
 
         // GET: Nominas
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int x)
         {
+            
             var montos = from n in _context.Nominas select n.MontoTotal;
             double total = montos.Sum();
             ViewData["Nomina"] = total.ToString();

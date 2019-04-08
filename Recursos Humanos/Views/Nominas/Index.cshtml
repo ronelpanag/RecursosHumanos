@@ -6,10 +6,14 @@
 
 <h1>Listado de nominas</h1>
 <hr />
-<p>
+<div>
     <a asp-action="Create" class="btn btn-outline-primary">Create New</a>
-
-</p>
+    <form>
+        <input name="BuscarPor" type="radio" value="0" />Buscar por mes
+        <input name="BuscarPor" type="radio" value="1" />Buscar por a&ntilde;o
+        <input name="Valor" type="text" />
+    </form>
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -35,21 +39,80 @@
                 @Html.DisplayFor(modelItem => item.Anio)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Mes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Dia)
-            </td>
-            <td>
-                RD$ @Html.DisplayFor(modelItem => item.MontoTotal)
+                @{ 
+                    switch (item.Mes)
+                    {
+                        case 1:
+                            ViewData["Mes"] = "Enero";
+                            break;
+                        case 2:
+                            ViewData["Mes"] = "Febrero";
+                            break;
+                        case 3:
+                            ViewData["Mes"] = "Marzo";
+                            break;
+                        case 4:
+                            ViewData["Mes"] = "Abril";
+                            break;
+                        case 5:
+                            ViewData["Mes"] = "Mayo";
+                            break;
+                        case 6:
+                            ViewData["Mes"] = "Junio";
+                            break;
+                        case 7:
+                            ViewData["Mes"] = "Julio";
+                            break;
+                        case 8:
+                            ViewData["Mes"] = "Agosto";
+                            break;
+                        case 9:
+                            ViewData["Mes"] = "Septiembre";
+                            break;
+                        case 10:
+                            ViewData["Mes"] = "Octubre";
+                            break;
+                        case 11:
+                            ViewData["Mes"] = "Noviembre";
+                            break;
+                        case 12:
+                            ViewData["Mes"] = "Diciembre";
+                            break;
+                        default:
+                            ViewData["Mes"] = "Mes invalido";
+                            break;
+                    }
+                        }
+                        @ViewData["Mes"]
+                    </td>
 
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Dia)
+                    </td>
+
+
+                    <td>
+                        RD$ @Html.DisplayFor(modelItem => item.MontoTotal)
+                    </td>
+
+
+                    <td>
+
+
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+
+
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+
+
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+
+
+                    </td>
+
+
+                </tr>
 }
     </tbody>
 
@@ -61,5 +124,4 @@
             <td><b><i>RD$ @ViewData["Nomina"]</i></b></td>
         </tr>
     </tfoot>
-
 </table>
