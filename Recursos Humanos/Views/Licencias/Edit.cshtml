@@ -17,6 +17,7 @@
                 <label asp-for="EmpleadoId" class="control-label"></label>
                 <select asp-for="EmpleadoId" class="form-control" asp-items="ViewBag.EmpleadoId"></select>
                 <span asp-validation-for="EmpleadoId" class="text-danger"></span>
+
             </div>
             <div class="form-group">
                 <label asp-for="Desde" class="control-label"></label>
@@ -47,6 +48,7 @@
 
 <div>
     <a asp-action="Index">Volver a la lista</a>
+
 </div>
 
 @section Scripts {
