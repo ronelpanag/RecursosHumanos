@@ -66,6 +66,9 @@ namespace Recursos_Humanos.Controllers
         {
             if (ModelState.IsValid)
             {
+                int id = 0;
+                id = ((from e in _context.Empleados select e.Id).Last() + 1);
+                empleado.Id = id;
                 empleado.Estado = true;
                 _context.Add(empleado);
                 await _context.SaveChangesAsync();
@@ -254,6 +257,7 @@ namespace Recursos_Humanos.Controllers
                 dataTable.Rows.Add(y.Mes, y.Total, y.Activos, y.Inactivos);
             }
             return Json(dataTable);
+
         }
 
         private bool EmpleadoExists(int id)
