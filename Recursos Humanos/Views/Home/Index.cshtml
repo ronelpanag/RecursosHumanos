@@ -2,11 +2,73 @@
     ViewData["Title"] = "Inicio";
 }
 
+@*Bienvenida*@
 <div class="text-center">
     <h1 class="display-4">Bienvenido/a</h1>
 </div>
-<br />
-<div id="columnchart_material" style="width: 100%; height: 500px;"></div>
 
+<br />
+
+@*Grafico*@
+<div id="columnchart_material" style="width: 100%; height: 500px;"></div>
+<br />
+
+@*Acciones del sistema*@
+<div class="text-center">
+    <h3>Modulos del sistema</h3>
+</div>
+<hr />
+<div>
+    <div class="list-group">
+        <a class="list-group-item list-group-item-action disabled">
+            <div class="d-flex w-100 justify-content-between">
+                <h4 class="mb-1">Mantenimientos</h4>
+            </div>
+            <p class="lead">Este m&oacute;dulo consiste en llenar las informaciones importantes para el flujo del sistema</p>
+        </a>
+        <a asp-action="Index" asp-controller="Departamentos" class="list-group-item list-group-item-action">Departamentos</a>
+        <a asp-action="Index" asp-controller="Cargos" class="list-group-item list-group-item-action">Cargos</a>
+        <a asp-action="Index" asp-controller="Empleados" class="list-group-item list-group-item-action">Empleados</a>
+    </div>
+       
+</div>
+
+<br />
+<div>
+    <div class="list-group">
+        <a class="list-group-item list-group-item-action disabled">
+            <div class="d-flex w-100 justify-content-between">
+                <h4 class="mb-1">Procesos</h4>
+            </div>
+            <p class="lead">Este m&oacute;dulo consiste en llenar las informaciones importantes para el flujo del sistema</p>
+        </a>
+        <a asp-action="Create" asp-controller="Nominas" class="list-group-item list-group-item-action">Nominas</a>
+        <a asp-action="Index" asp-controller="Vacaciones" class="list-group-item list-group-item-action">Vacaciones</a>
+        <a asp-action="Create" asp-controller="Permisos" class="list-group-item list-group-item-action">Permisos</a>
+        <a asp-action="Index" asp-controller="Licencias" class="list-group-item list-group-item-action">Licencias</a>
+        <a asp-action="Create" asp-controller="Salidas" class="list-group-item list-group-item-action">Salidas</a>
+    </div>
+       
+</div>
+
+<br />
+
+<div>
+    <div class="list-group">
+        <a class="list-group-item list-group-item-action disabled">
+            <div class="d-flex w-100 justify-content-between">
+                <h4 class="mb-1">Informes</h4>
+            </div>
+            <p class="lead">Este m&oacute;dulo consiste en llenar las informaciones importantes para el flujo del sistema</p>
+        </a>
+        <a asp-action="Index" asp-controller="Nominas" class="list-group-item list-group-item-action">Hist&oacute;rico de nominas</a>
+        <a asp-action="Index" asp-controller="Salidas" class="list-group-item list-group-item-action">Hist&oacute;rico de salidas</a>
+        <a asp-action="EmpleadoActivos" asp-controller="Empleados" class="list-group-item list-group-item-action">Empleados activos</a>
+        <a asp-action="EmpleadosInactivo" asp-controller="Empleados" class="list-group-item list-group-item-action">Empleados inactivos</a>
+        <a asp-action="Index" asp-controller="Permisos" class="list-group-item list-group-item-action">Permisos</a>
+        <a asp-action="Index" asp-controller="Departamentos" class="list-group-item list-group-item-action">Departamentos</a>
+        <a asp-action="Index" asp-controller="Cargos" class="list-group-item list-group-item-action">Cargos</a>
+    </div>
+</div>
 
 

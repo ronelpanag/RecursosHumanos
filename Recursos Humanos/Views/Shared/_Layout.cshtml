@@ -16,7 +16,8 @@
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
     </environment>
     <link rel="stylesheet" href="~/css/site.css" />
- 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
 </head>
 <body>
     <header>
@@ -48,7 +49,7 @@
 
     <footer class="border-top footer shadow-box text-muted">
         <div class="container">
-            &copy; @DateTime.Today.Year - Recursos Humanos - Hecho por Ronel Pantaleon - 2017-4877 - <i>Instituto Tecnol&oacute;gico de Las Americas, ITLA</i>
+            <p class="lead">&copy; @DateTime.Today.Year - Recursos Humanos - Hecho por Ronel Pantaleon - 2017-4877 - <i>Instituto Tecnol&oacute;gico de Las Americas, ITLA</i></p>
         </div>
     </footer>
 
@@ -83,8 +84,6 @@
                 async: false
             }).responseJSON;
        
-
-
         function drawChart() {
 
             var array = Array.from(jsonData);
@@ -93,8 +92,8 @@
             var data = new google.visualization.DataTable();
             data.addColumn("string", "Mes");
             data.addColumn("number", "Activos");
-            data.addColumn("number", "Inactivos");
-            data.addColumn("number", "Total");
+            data.addColumn("number", "Entradas");
+            data.addColumn("number", "Salidas");
             if (Array.isArray(array)) {
                 let x = 0;
                 while (x < 12) {
@@ -123,7 +122,26 @@
             chart.draw(data, google.charts.Bar.convertOptions(options));
         }
     </script>
-
+    <script>
+        $(document).ready(function () {
+            function Contains(text_one, text_two) {
+                if (text_one.indexOf(text_two) != -1) {
+                    return true;
+                }
+            }
+            $("#search").keyup(function () {
+                var searchText = $("#search").val().toLowerCase();
+                $(".search").each(function () {
+                    if (!Contains($(this).text().toLowerCase(), searchText)) {
+                        $(this).hide();
+                    }
+                    else {
+                        $(this).show();
+                    }
+                });
+            });
+        });
+    </script>
 
     @RenderSection("Scripts", required: false)
 </body>

@@ -12,6 +12,10 @@
     <Compile Remove="Data\Migrations\20190401134140_VersionFinal.Designer.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Remove="appsettings.Development.json" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
