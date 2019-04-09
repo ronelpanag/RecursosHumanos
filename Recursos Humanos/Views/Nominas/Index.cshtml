@@ -6,14 +6,13 @@
 
 <h1>Listado de nominas</h1>
 <hr />
-<div>
-    <a asp-action="Create" class="btn btn-outline-primary">Create New</a>
-    <form>
-        <input name="BuscarPor" type="radio" value="0" />Buscar por mes
-        <input name="BuscarPor" type="radio" value="1" />Buscar por a&ntilde;o
-        <input name="Valor" type="text" />
-    </form>
+<div class="form-row align-items-center">
+    <div class="input-group-prepend">
+        <span class="input-group-text"><i class="fas fa-search"></i></span>
+        <input type="text" id="search" placeholder="Buscar" class="form-control-sm" />
+    </div>
 </div>
+<br />
 <table class="table">
     <thead>
         <tr>
@@ -33,87 +32,88 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Anio)
-            </td>
-            <td>
-                @{ 
-                    switch (item.Mes)
-                    {
-                        case 1:
-                            ViewData["Mes"] = "Enero";
-                            break;
-                        case 2:
-                            ViewData["Mes"] = "Febrero";
-                            break;
-                        case 3:
-                            ViewData["Mes"] = "Marzo";
-                            break;
-                        case 4:
-                            ViewData["Mes"] = "Abril";
-                            break;
-                        case 5:
-                            ViewData["Mes"] = "Mayo";
-                            break;
-                        case 6:
-                            ViewData["Mes"] = "Junio";
-                            break;
-                        case 7:
-                            ViewData["Mes"] = "Julio";
-                            break;
-                        case 8:
-                            ViewData["Mes"] = "Agosto";
-                            break;
-                        case 9:
-                            ViewData["Mes"] = "Septiembre";
-                            break;
-                        case 10:
-                            ViewData["Mes"] = "Octubre";
-                            break;
-                        case 11:
-                            ViewData["Mes"] = "Noviembre";
-                            break;
-                        case 12:
-                            ViewData["Mes"] = "Diciembre";
-                            break;
-                        default:
-                            ViewData["Mes"] = "Mes invalido";
-                            break;
-                    }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Anio)
+                </td>
+                <td>
+                    @{
+                        switch (item.Mes)
+                        {
+                            case 1:
+                                ViewData["Mes"] = "Enero";
+                                break;
+                            case 2:
+                                ViewData["Mes"] = "Febrero";
+                                break;
+                            case 3:
+                                ViewData["Mes"] = "Marzo";
+                                break;
+                            case 4:
+                                ViewData["Mes"] = "Abril";
+                                break;
+                            case 5:
+                                ViewData["Mes"] = "Mayo";
+                                break;
+                            case 6:
+                                ViewData["Mes"] = "Junio";
+                                break;
+                            case 7:
+                                ViewData["Mes"] = "Julio";
+                                break;
+                            case 8:
+                                ViewData["Mes"] = "Agosto";
+                                break;
+                            case 9:
+                                ViewData["Mes"] = "Septiembre";
+                                break;
+                            case 10:
+                                ViewData["Mes"] = "Octubre";
+                                break;
+                            case 11:
+                                ViewData["Mes"] = "Noviembre";
+                                break;
+                            case 12:
+                                ViewData["Mes"] = "Diciembre";
+                                break;
+                            default:
+                                ViewData["Mes"] = "Mes invalido";
+                                break;
                         }
-                        @ViewData["Mes"]
-                    </td>
+                    }
+                    @ViewData["Mes"]
+                </td>
 
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Dia)
-                    </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dia)
+                </td>
 
 
-                    <td>
-                        RD$ @Html.DisplayFor(modelItem => item.MontoTotal)
-                    </td>
+                <td>
+                    RD$ @Html.DisplayFor(modelItem => item.MontoTotal)
+                </td>
 
 
-                    <td>
+                <td>
 
 
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
 
 
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
 
 
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
 
 
-                    </td>
+                </td>
 
 
-                </tr>
-}
+            </tr>
+        }
     </tbody>
 
     <tfoot>

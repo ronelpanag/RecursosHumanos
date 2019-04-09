@@ -4,11 +4,16 @@
     ViewData["Title"] = "EmpleadoActivos";
 }
 
-<h1>EmpleadoActivos</h1>
+<h1>Empleados activos</h1>
+<hr />
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="form-row align-items-center">
+    <div class="input-group-prepend">
+        <span class="input-group-text"><i class="fas fa-search"></i></span>
+        <input type="text" id="search" placeholder="Buscar" class="form-control-sm" />
+    </div>
+</div>
+<br />
 <table class="table">
     <thead>
         <tr>
@@ -41,7 +46,7 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+        <tr class="search">
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
@@ -64,7 +69,7 @@
                 @Html.DisplayFor(modelItem => item.Salario)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Estado)
+                Activo
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
