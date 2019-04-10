@@ -59,9 +59,9 @@
                 @ViewData["Estado"]
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <span><a asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-edit fa-lg text-success" style="padding-right: 6px;"></i></a></span>
+                <span><a asp-action="Details" asp-route-id="@item.Id"><i class="fas fa-file-alt fa-lg text-secondary" style="padding-right: 6px;"></i></a></span>   
+                <span><a asp-action="Delete" asp-route-id="@item.Id"><i class="fas fa-lg fa-trash-alt text-danger" style="padding-left: 3px;"></i></a></span>
             </td>
         </tr>
 }

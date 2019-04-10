@@ -121,6 +121,7 @@ namespace Recursos_Humanos.Controllers
             {
                 try
                 {
+                    empleado.Estado = true;
                     _context.Update(empleado);
                     await _context.SaveChangesAsync();
                 }

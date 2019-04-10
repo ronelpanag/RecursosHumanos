@@ -20,6 +20,7 @@ namespace Recursos_Humanos.Models.Procesos
         [DataType(DataType.Date)]
         public DateTime Desde { get; set; }
         [Required]
+        [DataType(DataType.Date)]
         public DateTime Hasta { get; set; }
         [Required]
         public string Motivo { get; set; }

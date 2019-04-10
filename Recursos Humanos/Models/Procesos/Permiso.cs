@@ -14,9 +14,8 @@ namespace Recursos_Humanos.Models.Procesos
         public int Id { get; set; }
         [Required]
         [DisplayName("Empleado")]
-        public Empleado Empleado { get; set; }
-        [Required]
         public int EmpleadoId { get; set; }
+        public Empleado Empleado { get; set; }
         [Required]
         [DataType(DataType.Date)]
         public DateTime Desde { get; set; }

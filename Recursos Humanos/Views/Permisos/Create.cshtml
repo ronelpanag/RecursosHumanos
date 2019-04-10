@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" asp-controller="Permisos">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="EmpleadoId" class="control-label"></label>
@@ -39,7 +39,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Volver a la lista</a>
+    <a asp-action="Index"><i class="fas fa-arrow-alt-circle-left"></i> Volver a la lista</a>
 </div>
 
 @section Scripts {

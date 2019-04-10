@@ -4,12 +4,14 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<h1>Eliminar departamento</h1>
+<br />
+<div class="alert-danger rounded" style="padding:10px">
+    <p class="lead text-center text-danger">Si se siente seguro, como para eliminar el departamento, presione "Eliminar"</p>
+</div>
 
-<h3>Si se siente seguro, como para eliminar el departamento, presione "Eliminar"</h3>
+<br />
 <div>
-    <h4>Departamento</h4>
-    <hr />
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.CodigoDepartamento)
@@ -30,6 +32,6 @@
         <input type="submit" value="Eliminar" class="btn btn-danger" />
         <br />
         <br />
-        <a asp-action="Index">Volver a la lista</a>
+        <a asp-action="Index"><i class="fas fa-arrow-alt-circle-left"></i> Volver a la lista</a>
     </form>
 </div>
