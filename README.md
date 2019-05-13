@@ -1,5 +1,5 @@
 # RecursosHumanos
-Proyecto final de Programacion 3, enfocado a un sistema de RRHH, utilizando ASP:NET CORE
+Proyecto final de Programacion 3, enfocado a un sistema de RRHH, utilizando ASP.NET CORE
 
 
 MÓDULO DE MANTENIMIENTOS
